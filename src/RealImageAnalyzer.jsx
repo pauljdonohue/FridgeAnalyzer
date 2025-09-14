@@ -204,6 +204,18 @@ export default function RealImageAnalyzer() {
     URL.revokeObjectURL(url);
   };
 
+  const resetAnalysis = () => {
+    setItems([]);
+    setCurrentImage(null);
+    setImageAnalysis(null);
+    setAnalysisStatus("");
+    setError("");
+    setIsAnalyzing(false);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   return (
     <div className="max-w-6xl mx-auto p-6 bg-white">
       <div className="mb-8">
@@ -240,14 +252,24 @@ export default function RealImageAnalyzer() {
               </div>
             </div>
           )}
-          <button
-            onClick={() => fileInputRef.current?.click()}
-            disabled={isAnalyzing}
-            className="mt-4 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
-          >
-            <Upload className="w-4 h-4 mr-2" />
-            {currentImage ? "Analyze New Image" : "Upload & Analyze"}
-          </button>
+          <div className="mt-4 flex justify-center space-x-3">
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              disabled={isAnalyzing}
+              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+            >
+              <Upload className="w-4 h-4 mr-2" />
+              {currentImage ? "Analyze New Image" : "Upload & Analyze"}
+            </button>
+            {(items.length > 0 || imageAnalysis) && !isAnalyzing && (
+              <button
+                onClick={resetAnalysis}
+                className="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
+              >
+                Reset Analysis
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
