@@ -14,7 +14,7 @@ export default function RealImageAnalyzer() {
   // --- simple food DB ---
   const foodDatabase = {
     apple: { colors: ["#ff4444", "#ffaa44", "#44ff44", "#ffff44"], shapes: ["round", "oval"], daysToExpiration: 30, estimateQuantity: c => `${c} apples` },
-    banana: { colors: ["#ffff44", "#ffaa44", "#44ff44"], shapes: ["elongated", "curved"], daysToExpiration: 7, estimateQuantity: c => `${c} bananas` },
+    bananas: { colors: ["#ffff44", "#ffaa44", "#44ff44"], shapes: ["elongated", "curved"], daysToExpiration: 7, estimateQuantity: c => `${c} bananas` },
     orange: { colors: ["#ff8844", "#ffaa44", "#ff6644"], shapes: ["round"], daysToExpiration: 14, estimateQuantity: c => `${c} oranges` },
     tomato: { colors: ["#ff4444", "#ff6644", "#ff8844"], shapes: ["round"], daysToExpiration: 7, estimateQuantity: c => `${c} tomatoes` },
     broccoli: { colors: ["#44ff44", "#66ff66", "#228844"], shapes: ["clustered", "tree-like"], daysToExpiration: 7, estimateQuantity: c => `${c} heads of broccoli` },
@@ -220,7 +220,7 @@ export default function RealImageAnalyzer() {
     <div className="max-w-6xl mx-auto p-6 bg-white">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Real Image Content Analyzer</h1>
-        <p className="text-gray-600">Uses computer vision to actually analyze what's in your images</p>
+        <p className="text-gray-600">Your Fridge in Your Pocket.</p>
       </div>
 
       {/* hidden canvas */}
