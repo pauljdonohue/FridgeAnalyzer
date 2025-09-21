@@ -11,7 +11,7 @@ export default function RealImageAnalyzer() {
   const fileInputRef = useRef(null);
   const canvasRef = useRef(null);
 
-  
+
   // --- simple food DB ---
   const foodDatabase = {
     apple: { colors: ["#ff4444", "#ffaa44", "#44ff44", "#ffff44"], shapes: ["round", "oval"], daysToExpiration: 30, estimateQuantity: c => `${c} apples` },
@@ -220,7 +220,7 @@ export default function RealImageAnalyzer() {
   return (
     <div className="max-w-6xl mx-auto p-6 bg-white">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Real Image Content Analyzer</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">AI Fridge Buddy</h1>
         <p className="text-gray-600">Your Fridge in Your Pocket.</p>
       </div>
 
