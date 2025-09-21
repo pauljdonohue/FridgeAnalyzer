@@ -11,6 +11,7 @@ export default function RealImageAnalyzer() {
   const fileInputRef = useRef(null);
   const canvasRef = useRef(null);
 
+  
   // --- simple food DB ---
   const foodDatabase = {
     apple: { colors: ["#ff4444", "#ffaa44", "#44ff44", "#ffff44"], shapes: ["round", "oval"], daysToExpiration: 30, estimateQuantity: c => `${c} apples` },

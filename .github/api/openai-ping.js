@@ -7,7 +7,6 @@ export default async function handler(req, res) {
       });
     }
 
-    
     const r = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
       headers: {
