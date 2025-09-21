@@ -1,10 +1,8 @@
+// /api/openai-ping.js
 export default async function handler(req, res) {
   try {
     if (!process.env.OPENAI_API_KEY) {
-      return res.status(500).json({
-        ok: false,
-        error: "OPENAI_API_KEY is not set in environment variables.",
-      });
+      return res.status(500).json({ ok: false, error: "OPENAI_API_KEY not set" });
     }
 
     const r = await fetch("https://api.openai.com/v1/responses", {
@@ -19,15 +17,9 @@ export default async function handler(req, res) {
       }),
     });
 
-
-
-    const raw = await r.text();               // read raw to show useful errors
+    const raw = await r.text();
     if (!r.ok) {
-      return res.status(r.status).json({
-        ok: false,
-        error: `OpenAI error ${r.status}`,
-        detail: raw,
-      });
+      return res.status(r.status).json({ ok: false, error: raw });
     }
 
     let data;
@@ -36,7 +28,7 @@ export default async function handler(req, res) {
     const text =
       data?.output_text ||
       data?.content?.[0]?.text ||
-      data?.choices?.[0]?.message?.content ||
+      data?.output?.[0]?.text ||   // <- your screenshot shows this path
       raw;
 
     return res.status(200).json({ ok: true, text });
