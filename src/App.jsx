@@ -5,7 +5,7 @@ import "./index.css";
 export default function App() {
   const [pingResult, setPingResult] = useState("");
 
-  // Call the serverless API route
+  // Call the serverless API route V2
   const handlePing = async () => {
   setPingResult("Calling…");
   try {
