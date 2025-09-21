@@ -6,6 +6,7 @@ export default async function handler(req, res) {
         error: "OPENAI_API_KEY is not set in environment variables.",
       });
     }
+    
 
     const r = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
@@ -18,6 +19,8 @@ export default async function handler(req, res) {
         input: 'Reply with the single word: "pong".',
       }),
     });
+
+
 
     const raw = await r.text();               // read raw to show useful errors
     if (!r.ok) {

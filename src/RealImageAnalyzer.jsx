@@ -204,6 +204,7 @@ export default function RealImageAnalyzer() {
     a.href = url; a.download = `visual_food_analysis_${new Date().toISOString().split("T")[0]}.csv`; a.click();
     URL.revokeObjectURL(url);
   };
+  
 
   const resetAnalysis = () => {
     setItems([]);
