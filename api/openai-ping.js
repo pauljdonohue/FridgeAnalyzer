@@ -5,6 +5,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ ok: false, error: "OPENAI_API_KEY not set" });
     }
 
+    
     const r = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
       headers: {
