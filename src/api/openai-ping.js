@@ -1,31 +1,44 @@
-// api/openai-ping.js
 export default async function handler(req, res) {
   try {
-    // minimal “is it working?” call using the Responses API
-    const r = await fetch('https://api.openai.com/v1/responses', {
-      method: 'POST',
+    if (!process.env.OPENAI_API_KEY) {
+      return res.status(500).json({
+        ok: false,
+        error: "OPENAI_API_KEY is not set in environment variables.",
+      });
+    }
+
+    const r = await fetch("https://api.openai.com/v1/responses", {
+      method: "POST",
       headers: {
-        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',          // small & cheap sanity-check model
-        input: 'Say "pong" in one word.'
+        model: "gpt-4o-mini",
+        input: 'Reply with the single word: "pong".',
       }),
     });
 
-    const data = await r.json();
+    const raw = await r.text();               // read raw to show useful errors
+    if (!r.ok) {
+      return res.status(r.status).json({
+        ok: false,
+        error: `OpenAI error ${r.status}`,
+        detail: raw,
+      });
+    }
 
-    // A simple, robust way to surface success:
-    // Try common fields; fall back to returning raw JSON.
+    let data;
+    try { data = JSON.parse(raw); } catch { data = { raw }; }
+
     const text =
       data?.output_text ||
       data?.content?.[0]?.text ||
       data?.choices?.[0]?.message?.content ||
-      JSON.stringify(data);
+      raw;
 
-    res.status(200).json({ ok: true, text });
-  } catch (err) {
-    res.status(500).json({ ok: false, error: String(err) });
+    return res.status(200).json({ ok: true, text });
+  } catch (e) {
+    return res.status(500).json({ ok: false, error: String(e) });
   }
 }

@@ -7,15 +7,17 @@ export default function App() {
 
   // Call the serverless API route
   const handlePing = async () => {
-    try {
-      const res = await fetch("/api/openai-ping");
-      const data = await res.json();
-      setPingResult(data.message || "No response");
-    } catch (err) {
-      console.error(err);
-      setPingResult("Error calling API");
-    }
-  };
+  setPingResult("Calling…");
+  try {
+    const res = await fetch("/api/openai-ping");
+    const data = await res.json();
+    setPingResult(
+      data.ok ? data.text : `❌ ${data.error}${data.detail ? ` — ${data.detail}` : ""}`
+    );
+  } catch (err) {
+    setPingResult(`❌ ${String(err)}`);
+  }
+};
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
