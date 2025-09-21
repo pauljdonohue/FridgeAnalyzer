@@ -11,9 +11,7 @@ export default function App() {
   try {
     const res = await fetch("/api/openai-ping");
     const data = await res.json();
-    setPingResult(
-      data.ok ? data.text : `❌ ${data.error}${data.detail ? ` — ${data.detail}` : ""}`
-    );
+    setPingResult(data.ok ? data.text : `❌ ${data.error || "Unknown error"}`);
   } catch (err) {
     setPingResult(`❌ ${String(err)}`);
   }
